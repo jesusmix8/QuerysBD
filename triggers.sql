@@ -1,0 +1,1 @@
+/* Creacion de los triggers  para cada tabla*/ 
