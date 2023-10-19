@@ -30,3 +30,8 @@ VALUES ();
 
 INSERT INTO CaracteristicasServicios (concepto, cveInterbancaria, noTarjeta, lineaDeCredito, fechaDeCorte, fechaDeExpiracion, cvv, nip, fechaDeApertura, pagoMinimo, pagoParaNoGenerarIntereses, promociones, fechaDePago, interes, saldo)
 VALUES ();
+
+INSERT INTO Estado (ID_Estado, nomEstado)
+VALUES ();
+INSERT INTO Municipio (ID_Municipio, nomMunicipio)
+VALUES ('MUN001', 'Ciudad A');
