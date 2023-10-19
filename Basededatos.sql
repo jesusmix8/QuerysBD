@@ -59,5 +59,10 @@ CREATE TABLE direccion(
 );
 
 CREATE TABLE sucursal(
+	sucursal serial PRIMARY KEY NOT NULL,
+	nomSucursal VARCHAR(24) NOT NULL,
+	horario TIME NOT NULL,
+	telefonoDeContacto NUMBER(10) NOT NULL,
 	
+
 );
