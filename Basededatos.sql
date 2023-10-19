@@ -78,3 +78,4 @@ CREATE TABLE municipio(
 	municipio_ID serial PRIMARY KEY NOT NULL,
 	nomMunicipio VARCHAR(25) NOT NULL
 );
+
