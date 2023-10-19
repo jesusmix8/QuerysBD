@@ -25,7 +25,6 @@ CREATE TABLE empleado (
 
 
 
-
 CREATE TABLE cuenta(
 	cuenta_ID SERIAL PRIMARY KEY NOT null
 );
@@ -79,3 +78,20 @@ CREATE TABLE municipio(
 	nomMunicipio VARCHAR(25) NOT NULL
 );
 
+CREATE TABLE CaracteristicasServicios (
+    concepto VARCHAR(255),
+    cveInterbancaria INTEGER,
+    noTarjeta INTEGER,
+    lineaDeCredito FLOAT,
+    fechaDeCredito DATE,
+    fechaDeExpiracion DATE,
+    cvv INTEGER,
+    nip INTEGER,
+    fechaDeApertura DATE,
+    pagoMinimo FLOAT,
+    pagoParaNoGenerarIntereses FLOAT,
+    promociones VARCHAR(50),
+    fechaDePago DATE,
+    intereses FLOAT,
+    saldo FLOAT
+);
