@@ -34,4 +34,4 @@ VALUES ();
 INSERT INTO Estado (ID_Estado, nomEstado)
 VALUES ();
 INSERT INTO Municipio (ID_Municipio, nomMunicipio)
-VALUES ('MUN001', 'Ciudad A');
+VALUES ();
