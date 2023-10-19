@@ -95,3 +95,22 @@ CREATE TABLE CaracteristicasServicios (
     intereses FLOAT,
     saldo FLOAT
 );
+
+CREATE TABLE caracteristica_servicio (
+    concepto VARCHAR(255) not null,
+    cveInterbancaria INTEGER not null,
+    noTarjeta INTEGER not null,
+    lineaDeCredito FLOAT not null,
+    fechaDeCredito DATE not null,
+    fechaDeExpiracion DATE not null,
+    cvv INTEGER not null,
+    nip INTEGER not null,
+    fechaDeApertura DATE not null,
+    pagoMinimo FLOAT not null,
+    pagoParaNoGenerarIntereses FLOAT not null,
+    promociones VARCHAR(50),
+    fechaDePago DATE not null,
+    intereses FLOAT not null,
+    saldo FLOAT not null,
+    servicios_ID integer UNIQUE REFERENCES servicio(idSerial)
+);
