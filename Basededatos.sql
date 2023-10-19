@@ -1,7 +1,7 @@
 /* Aqui iran los querys de la creacion de la base de datos */
 
 
-CREATE TABLE Persona (
+CREATE TABLE persona (
     RFC VARCHAR(12) PRIMARY KEY NOT NULL,
     nombre VARCHAR(25) NOT NULL,
     apellido VARCHAR(25) NOT NULL,
@@ -42,8 +42,22 @@ CREATE TABLE transaccion (
 );
 
 
-CREATE TABLE Servicio (
+CREATE TABLE servicio (
 	idSerial serial Primary key not null,
 	nombreDeServicio Varchar (50) not null,
 	cuenta_id integer UNIQUE REFERENCES cuenta (cuenta_id)
+);
+
+
+
+CREATE TABLE direccion(
+	direccion_ID serial PRIMARY KEY NOT NULL,
+	calle VARCHAR(20) NOT NULL,
+	codigoPostal VARCHAR(5) NOT NULL,
+	numero VARCHAR(5) NOT NULL,
+	colonia VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE sucursal(
+	
 );
