@@ -1,6 +1,4 @@
 /* Aqui iran los querys de la creacion de la base de datos */
-
-
 CREATE TABLE persona (
     RFC VARCHAR(12) PRIMARY KEY NOT NULL,
     nombre VARCHAR(25) NOT NULL,
@@ -62,13 +60,21 @@ CREATE TABLE direccion(
 );
 
 CREATE TABLE sucursal(
-	sucursal serial PRIMARY KEY NOT NULL,
+	sucursal_ID serial PRIMARY KEY NOT NULL,
 	nomSucursal VARCHAR(24) NOT NULL,
 	horario TIME NOT NULL,
 	telefonoDeContacto NUMBER(10) NOT NULL,
 	direccion_ID integer UNIQUE REFERENCES direccion(direccion_ID),
 	cliente_ID integer UNIQUE REFERENCES cliente(cliente_ID),
 	empleado_ID integer UNIQUE REFERENCES empleado(empleado_ID)
+);
 
+CREATE TABLE estado(
+	estado_ID serial PRIMARY KEY NOT NULL,
+	nomEstado VARCHAR(18) NOT NULL,
+);
 
+CREATE TABLE municipio(
+	municipio_ID serial PRIMARY KEY NOT NULL,
+	nomMunicipio VARCHAR(25) NOT NULL
 );
