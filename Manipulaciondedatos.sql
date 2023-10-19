@@ -27,3 +27,6 @@ VALUES ();
 
 INSERT INTO sucursal (nomSucursal, horario, telefonoDeContacto)
 VALUES ();
+
+INSERT INTO CaracteristicasServicios (concepto, cveInterbancaria, noTarjeta, lineaDeCredito, fechaDeCorte, fechaDeExpiracion, cvv, nip, fechaDeApertura, pagoMinimo, pagoParaNoGenerarIntereses, promociones, fechaDePago, interes, saldo)
+VALUES ();
