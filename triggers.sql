@@ -6,6 +6,7 @@
 /*
  1.- Definir los triggers de que van a hacer
 */
+
 CREATE OR REPLACE FUNCTION validar_correo()
   RETURNS TRIGGER 
   LANGUAGE PLPGSQL

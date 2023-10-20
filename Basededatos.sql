@@ -78,24 +78,6 @@ CREATE TABLE municipio(
 	nomMunicipio VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE CaracteristicasServicios (
-    concepto VARCHAR(255),
-    cveInterbancaria INTEGER,
-    noTarjeta INTEGER,
-    lineaDeCredito FLOAT,
-    fechaDeCredito DATE,
-    fechaDeExpiracion DATE,
-    cvv INTEGER,
-    nip INTEGER,
-    fechaDeApertura DATE,
-    pagoMinimo FLOAT,
-    pagoParaNoGenerarIntereses FLOAT,
-    promociones VARCHAR(50),
-    fechaDePago DATE,
-    intereses FLOAT,
-    saldo FLOAT
-);
-
 CREATE TABLE caracteristica_servicio (
     concepto VARCHAR(255) not null,
     cveInterbancaria NUMERIC(18) not null,
