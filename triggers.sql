@@ -69,6 +69,7 @@ Tabla Cuenta
 /*
 Tabla Transaccion
 	Un trigger para asegurar que el monto no sea negativo
+	Un trigger para asegurar que no exeda el saldo disponible del usuario en una transaccion 
 */
 /*************************************/
 
