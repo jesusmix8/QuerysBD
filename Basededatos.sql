@@ -1,20 +1,20 @@
 /* Aqui iran los querys de la creacion de la base de datos */
 CREATE TABLE persona (
-    RFC VARCHAR(12) PRIMARY KEY NOT NULL,
+    RFC VARCHAR(13) PRIMARY KEY NOT NULL,
     nombre VARCHAR(25) NOT NULL,
     apellido VARCHAR(25) NOT NULL,
 	numeroDeTelefono NUMERIC(10) NOT NULL,
-	correo VARCHAR(35) NOT NULL,
+	correo VARCHAR(50) NOT NULL,
     fechadeNacimiento DATE NOT NULL,
-	genero VARCHAR(20) Not NULL,
+	genero VARCHAR(1) Not NULL,
 	direccion_ID integer UNIQUE REFERENCES direccion(direccion_ID)
 );
 
 
 CREATE TABLE cliente (
     cliente_ID serial PRIMARY KEY NOT NULL,  
-	usuario VARCHAR(25) NOT NULL,
-	contraseña VARCHAR (100) NOT NULL
+	usuario VARCHAR(10) NOT NULL,
+	contraseña VARCHAR (10) NOT NULL
 ) INHERITS (persona);
 
 CREATE TABLE empleado (
@@ -27,6 +27,8 @@ CREATE TABLE empleado (
 
 CREATE TABLE cuenta(
 	cuenta_ID SERIAL PRIMARY KEY NOT null
+	cliente_ID integer UNIQUE REFERENCES cliente(cliente_ID),
+	servicios_ID integer UNIQUE REFERENCES servicio(servicios_ID)
 );
 
 
@@ -38,14 +40,14 @@ CREATE TABLE transaccion (
 	cuentaDestino varchar (25) NOT NULL,
 	monto float (2) NOT NULL,
 	concepto varchar(50) NOT NULL,
-	cuenta_ID integer REFERENCES cuenta(cuenta_id)
+	cuenta_ID integer REFERENCES cuenta(cuenta_ID)
 );
 
 
 CREATE TABLE servicio (
-	idSerial serial Primary key not null,
+	serial_ID serial Primary key not null,
 	nombreDeServicio Varchar (50) not null,
-	cuenta_ID integer UNIQUE REFERENCES cuenta (cuenta_id)
+	cuenta_ID integer UNIQUE REFERENCES cuenta (cuenta_ID)
 );
 
 
@@ -60,7 +62,7 @@ CREATE TABLE direccion(
 
 CREATE TABLE sucursal(
 	sucursal_ID serial PRIMARY KEY NOT NULL,
-	nomSucursal VARCHAR(24) NOT NULL,
+	nomSucursal VARCHAR(25) NOT NULL,
 	horario TIME NOT NULL,
 	telefonoDeContacto NUMERIC(10) NOT NULL,
 	direccion_ID integer UNIQUE REFERENCES direccion(direccion_ID),
@@ -79,20 +81,20 @@ CREATE TABLE municipio(
 );
 
 CREATE TABLE caracteristica_servicio (
-    concepto VARCHAR(255) not null,
-    cveInterbancaria NUMERIC(18) not null,
-    noTarjeta NUMERIC(16) not null,
-    lineaDeCredito FLOAT not null,
-    fechaDeCredito DATE not null,
-    fechaDeExpiracion DATE not null,
-    cvv INTEGER not null,
-    nip INTEGER not null,
-    fechaDeApertura DATE not null,
-    pagoMinimo FLOAT not null,
-    pagoParaNoGenerarIntereses FLOAT not null,
+    concepto VARCHAR(255),
+    cveInterbancaria NUMERIC(18),
+    noTarjeta NUMERIC(16),
+    lineaDeCredito FLOAT,
+    fechaDeCredito DATE,
+    fechaDeExpiracion DATE,
+    cvv INTEGER,
+    nip INTEGER,
+    fechaDeApertura DATE ,
+    pagoMinimo FLOAT ,
+    pagoParaNoGenerarIntereses FLOAT,
     promociones VARCHAR(50),
-    fechaDePago DATE not null,
-    intereses FLOAT not null,
-    saldo FLOAT not null,
+    fechaDePago DATE,
+    intereses FLOAT,
+    saldo FLOAT,
     servicios_ID integer UNIQUE REFERENCES servicio(idSerial)
 );
