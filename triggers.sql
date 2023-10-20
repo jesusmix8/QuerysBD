@@ -68,7 +68,7 @@ Tabla Cuenta
 /*************************************/
 /*
 Tabla Transaccion
-	
+	Un trigger para asegurar que el monto no sea negativo
 */
 /*************************************/
 
@@ -78,7 +78,7 @@ Tabla Transaccion
 /*************************************/
 /*
 Tabla Servicio
-	
+	Un trigger para actualizar la cuenta asociada al servicio para cuando se inserta un nuevo servicio
 */
 /*************************************/
 
