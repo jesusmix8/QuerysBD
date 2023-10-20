@@ -128,7 +128,9 @@ Tabla Municipio
 /*************************************/
 /*
 Tabla caracteristica_servicio
-
+ 	Un trigger para actualizar el saldo del usuario cuando da o recibe dinero
+ 	Un trigger para actualizar el ppng y pm de la tarjeta de credito cada vez que se raliza una transaccion 
+	
 */
 /*************************************/
 
