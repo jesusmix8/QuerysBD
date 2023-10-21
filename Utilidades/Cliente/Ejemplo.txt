@@ -1,0 +1,16 @@
+MACM420604, Miguel, Martínez Cruz, 3630508252, MACM420604@icloud.com, 1942-06-04, 1,MigMar6188, wu$RAXFZp
+ORAD380311, Daniel, Ortiz Aguilar, 6424398508, ORAD380311@icloud.com, 1938-03-11, 2,DanOrt5386, x5BCsXa$z
+ORLM780920, Manuel, Ortiz López, 6162426593, ORLM780920@gmail.com, 1978-09-20, 3,ManOrt7295, FaxO^veLD
+MÉML590704, Luis, Méndez Martínez, 6063505998, MÉML590704@gmail.com, 1959-07-04, 4,LuiMén3286, a6Y4yeCh!
+FLGE280213, Enrique, Flores García, 6288844357, FLGE280213@yandex.com, 1928-02-13, 5,EnrFlo8617, p92gUkS#j
+CAHJ650228, Juan, Castro Hernández, 7705935965, CAHJ650228@yandex.com, 1965-02-28, 6,JuaCas4015, NB@j3l(k!
+GAAJ241125, Jorge, García Aguilar, 2194938492, GAAJ241125@gmail.com, 1924-11-25, 7,JorGar1213, A!A#kRlqV
+VÁMR500209, Ramón, Vázquez Mendoza, 7597836305, VÁMR500209@outlook.com, 1950-02-09, 8,RamVáz6555, (sPPHFfp4
+ÁLJJ510509, Jesús, Álvarez Jiménez, 4053169773, ÁLJJ510509@gmail.com, 1951-05-09, 9,JesÁlv5102, H*RK6ydSj
+MEDE970303, Enrique, Mendoza Díaz, 9247139810, MEDE970303@yandex.com, 1997-03-03, 10,EnrMen7100, 8aKToA9wF
+CEAL021018, Luis, Cervantes Aguilar, 4205408364, CEAL021018@yandex.com, 2002-10-18, 11,LuiCer3513, 0W%+3f@yN
+GOHR690123, Ramón, González Hernández, 1371096072, GOHR690123@yandex.com, 1969-01-23, 12,RamGon1822, XctSYx4sP
+JIJL810610, Luis, Jiménez Jiménez, 7542668104, JIJL810610@yandex.com, 1981-06-10, 13,LuiJim5037, %Z*6rUsbD
+GOVR890404, Roberto, González Vázquez, 8118223767, GOVR890404@icloud.com, 1989-04-04, 14,RobGon3209, jjje85z3(
+MECM560812, Manuel, Medina Castillo, 4100347450, MECM560812@outlook.com, 1956-08-12, 15,ManMed9662, srjX8gHwA
+CARR740413, Rafael, Castillo Ramírez, 1742197861, CARR740413@yandex.com, 1974-04-13, 16,RafCas3530, KBeea(N5D

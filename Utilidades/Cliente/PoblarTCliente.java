@@ -8,27 +8,68 @@ import java.util.stream.IntStream;
 
 public class PoblarTCliente{
 
-    private static String[] nombres;
-    private static String[] apellidos;
-    private static Random rn;
-
     public static void main(String[] args) throws Exception {
-        
-        rn = new Random();
-        nombres = Files.lines(new File("./fuentes/nombres.txt").toPath()).toArray(String[]::new);
-        apellidos = Files.lines(new File("./fuentes/apellidos.txt").toPath()).toArray(String[]::new);
 
-        String res = IntStream.range(0, 5).mapToObj(PoblarTCliente::generarQueryCliente).collect(Collectors.joining("\n"));
+        String[] nombres = Files.lines(new File("./fuentes/nombres.txt").toPath()).toArray(String[]::new);
+        String[] apellidos = Files.lines(new File("./fuentes/apellidos.txt").toPath()).toArray(String[]::new);
+        Thread[] hilos = new Thread[8];
+        Proceso[] procesos = new Proceso[8];
+        String body = "";
 
-        try (PrintWriter out = new PrintWriter("filename.txt")) {
-             out.println(res);
+        for(int i = 0; i < 8; i++){
+            procesos[i] = new Proceso(nombres.clone(), apellidos.clone(), i);
+            hilos[i] = Thread.ofVirtual().start(procesos[i]);
         }
 
+        for(Thread hilo : hilos){
+            hilo.join();
+        }
+
+        body = IntStream.range(0, 8).mapToObj(i -> procesos[i].getResult()).collect(Collectors.joining("\n"));
+
+        try (PrintWriter out = new PrintWriter("filename.txt")) {
+             out.println(body);
+        }
     }
 
-    private static String generarQueryCliente(int i){
-        return new Cliente(nombres[rn.nextInt(nombres.length)], apellidos[rn.nextInt(nombres.length)] + " " + apellidos[rn.nextInt(nombres.length)]).toString();
+   
+}
+
+class Proceso implements Runnable{
+
+    private String[] nombres;
+    private String[] apellidos;
+
+    private int pID;
+    private String result;
+    private Random rn;
+
+    public Proceso(String[] nombres, String[] apellidos, int pID){
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.pID = pID;
     }
+
+    @Override
+    public void run() {
+       rn = new Random(); 
+       result = IntStream.range(0, 125000).mapToObj(i -> generarQueryCliente(i)).collect(Collectors.joining("\n")); 
+    }
+
+    public String getResult(){
+        return result;
+    }
+
+    private String generarQueryCliente(int i){
+        int nL = nombres.length;
+        int aL = apellidos.length;
+        Cliente c = new Cliente(nombres[rn.nextInt(nL)], apellidos[rn.nextInt(aL)] + " " + apellidos[rn.nextInt(nombres.length)], pID*125000 + i+1);
+        String query = c.toString();
+        c = null;
+        //System.gc();
+        return query;
+    }
+
 }
 
 class Cliente{
@@ -45,20 +86,7 @@ class Cliente{
 
         private Random rn;
 
-        //Solo para pruebas
-        public Cliente(){
-            rfc = "AQC030324";
-            nombre = "Alejandro";
-            apellido = "Quiroz Carmona";
-            telefono = 9999999999L ;
-            correo = "andresmanuel@horsefucker.org";
-            fechaDeNacimiento = new Date(-1577838006000L);
-            direccion_ID = 1;
-            usuario = "aquirozc";
-            contraseña = "cruzazul";
-        }
-
-        public Cliente(String nombre, String apellido){
+        public Cliente(String nombre, String apellido, int dID){
             this.rn = new Random();
             
             this.nombre = nombre;
@@ -67,43 +95,45 @@ class Cliente{
             this.rfc = generarRFC();
             this.telefono = rn.nextLong(1000000000, 9999999999L);
 
-            this.usuario = "admin";
-            this.contraseña = "pass";
+            this.usuario = generarUsuario();
+            this.contraseña = generarContraseña();
             this.correo = generarCorreo();
 
-            this.direccion_ID = 1;
+            this.direccion_ID = dID;
         }
 
         private String generarRFC(){
             String[] dateCUM = fechaDeNacimiento.toString().split("-");
-            String rfc = apellido.substring(0, 2) + apellido.charAt(apellido.indexOf(" ") + 1) + nombre.charAt(0);
-            rfc += IntStream.range(0, 3).mapToObj(i ->  i == 0 ? dateCUM[i].substring(2)  : dateCUM[i]).collect(Collectors.joining());
-            return rfc.toUpperCase(); 
+            String nuevoRFC = apellido.substring(0, 2) + apellido.charAt(apellido.indexOf(" ") + 1) + nombre.charAt(0);
+            nuevoRFC+= IntStream.range(0, 3).mapToObj(i ->  i == 0 ? dateCUM[i].substring(2)  : dateCUM[i]).collect(Collectors.joining());
+            return nuevoRFC.toUpperCase(); 
         }
 
         private String generarCorreo(){
-            return rfc + "@" + ProvedoresDeCorreo.values()[rn.nextInt(ProvedoresDeCorreo.values().length)].ext;
+            String[] extensiones = {"@outlook.com","@gmail.com","@icloud.com","@yandex.com"};
+            return rfc  + extensiones[rn.nextInt(extensiones.length)];
         }
 
+        private String generarContraseña(){
+            String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+            int cL = caracteres.length();
+            return IntStream.range(0, 9).mapToObj(i -> caracteres.charAt(rn.nextInt(cL)) + "").collect(Collectors.joining(""));
+        }
 
-        @Override
-        public String toString(){
-            return "INSERT INTO Persona (RFC, nombre, apellido, numeroDeTelefono, correo, fechadeNacimiento, direccion_ID, usuario, contraseña)"
+        private String generarUsuario(){
+           return nombre.substring(0, 3) + apellido.substring(0, 3) + rn.nextInt(1000,9999);
+        }
+
+        public String toStringLegacy(){
+            return "INSERT INTO CLIENTE (RFC, nombre, apellido, numeroDeTelefono, correo, fechadeNacimiento, direccion_ID, usuario, contraseña)"
             + " VALUES('" + rfc + "', '" + nombre + "', '" + apellido + "', " + telefono + ", '" + correo + "', '" + fechaDeNacimiento
             + "', " + direccion_ID + ", '" + usuario + "', '" + contraseña + "');";
         }
 
-        private enum ProvedoresDeCorreo{
-
-            PERSONAL_EXCHANGE("outlook.com"),
-            GMS("gmail.com"),
-            YAHOO("yahoo.com"),
-            APPLE("icloud.com");
-            
-            final String ext;
-            ProvedoresDeCorreo(String ext){
-                this.ext = ext;
-            }
+        @Override
+        public String toString(){
+            return rfc + ", " + nombre + ", " + apellido + ", " + telefono + ", " + correo + ", " + fechaDeNacimiento
+            + ", " + direccion_ID + "," + usuario + ", " + contraseña;
         }
 
 }
