@@ -29,9 +29,8 @@ CREATE TABLE empleado (
 
 CREATE TABLE cuenta(
 	cuenta_ID SERIAL PRIMARY KEY NOT NULL,
-	cliente_ID integer UNIQUE REFERENCES cliente(cliente_ID),
-	servicios_ID integer UNIQUE REFERENCES servicio(servicios_ID)
-    servicios_ID INTEGER CONSTRAINT servicios_ID_fkey REFERENCES servicio(servicios_ID)
+	cliente_ID integer CONSTRAINT cliente_ID_fkey REFERENCES cliente(cliente_ID),
+    servicio_ID INTEGER CONSTRAINT servicios_ID_fkey REFERENCES servicio(servicios_ID)
 );
 
 /*
