@@ -7,8 +7,7 @@ CREATE TABLE persona (
 	correo VARCHAR(50) NOT NULL,
     fechadeNacimiento DATE NOT NULL,
 	genero VARCHAR(1) NOT NULL,
-	direccion_ID integer UNIQUE REFERENCES direccion(direccion_ID)
---  direcion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direcion_ID),
+    direcion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direcion_ID),
     CONSTRAINT genero_IN CHECK (genero IN ('M', 'H'))
 );
 
@@ -32,7 +31,7 @@ CREATE TABLE cuenta(
 	cuenta_ID SERIAL PRIMARY KEY NOT NULL,
 	cliente_ID integer UNIQUE REFERENCES cliente(cliente_ID),
 	servicios_ID integer UNIQUE REFERENCES servicio(servicios_ID)
---  servicios_ID INTEGER CONSTRAINT servicios_ID_fkey REFERENCES servicio(servicios_ID)
+    servicios_ID INTEGER CONSTRAINT servicios_ID_fkey REFERENCES servicio(servicios_ID)
 );
 
 /*
@@ -49,8 +48,7 @@ CREATE TABLE transaccion (
 	cuentaDestino varchar (25) NOT NULL,
 	monto float (2) NOT NULL,
 	concepto varchar(50) NOT NULL,
-	cuenta_ID integer REFERENCES cuenta(cuenta_ID),
---  cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID),
+	cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID),
     CONSTRAINT monto_positive CHECK(monto > 0)
 );
     
@@ -59,8 +57,7 @@ CREATE TABLE transaccion (
 CREATE TABLE servicio (
 	serial_ID serial PRIMARY KEY NOT NULL,
 	nombreDeServicio VARCHAR (50) NOT NULL,
-	cuenta_ID INTEGER UNIQUE REFERENCES cuenta (cuenta_ID)
---  cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID)
+	 cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID)
 );
 
 
@@ -78,12 +75,9 @@ CREATE TABLE sucursal(
 	nomSucursal VARCHAR(25) NOT NULL,
 	horario TIME NOT NULL,
 	telefonoDeContacto NUMERIC(10) NOT NULL,
-	direccion_ID integer UNIQUE REFERENCES direccion(direccion_ID),
-	cliente_ID integer UNIQUE REFERENCES cliente(cliente_ID),
-	empleado_ID integer UNIQUE REFERENCES empleado(empleado_ID)
---  direccion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direccion_ID),
---  cliente_ID INTEGER CONSTRAINT cliente_ID_fkey REFERENCES cliente(cliente_ID),
---  empleado_ID INTEGER CONSTRAINT empelado_ID_fkey REFERENCES empleado(empleado_ID)
+    direccion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direccion_ID),
+    cliente_ID INTEGER CONSTRAINT cliente_ID_fkey REFERENCES cliente(cliente_ID),
+    empleado_ID INTEGER CONSTRAINT empelado_ID_fkey REFERENCES empleado(empleado_ID)
 );
 
 CREATE TABLE estado(
@@ -112,6 +106,5 @@ CREATE TABLE caracteristica_servicio (
     fechaDePago DATE,
     intereses FLOAT,
     saldo FLOAT,
-    servicios_ID integer UNIQUE REFERENCES servicio(idSerial)
---  servicios_ID INTEGER CONSTRAINT servicios_ID_fkey REFERENCES servicio(idSerial)
+    servicios_ID INTEGER CONSTRAINT servicios_ID_fkey REFERENCES servicio(idSerial)
 );
