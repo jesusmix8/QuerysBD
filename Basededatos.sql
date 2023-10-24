@@ -81,14 +81,11 @@ CREATE TABLE sucursal(
 );
 
 CREATE TABLE estado(
-	estado_ID serial PRIMARY KEY NOT NULL,
-	nomEstado VARCHAR(30) NOT NULL
+	codigoPostal INTEGER PRIMARY KEY NOT NULL,
+	nombreEstado VARCHAR(30) NOT NULL,
+	nombreMunicipio VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE municipio(
-	municipio_ID serial PRIMARY KEY NOT NULL,
-	nomMunicipio VARCHAR(30) NOT NULL
-);
 
 CREATE TABLE caracteristica_servicio (
     concepto VARCHAR(255),
