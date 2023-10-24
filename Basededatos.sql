@@ -8,7 +8,7 @@ CREATE TABLE persona (
     fechadeNacimiento DATE NOT NULL,
 	genero VARCHAR(1) NOT NULL,
     direcion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direcion_ID),
-    CONSTRAINT genero_IN CHECK (genero IN ('M', 'H'))
+    CONSTRAINT genero_IN CHECK (genero IN ('M', 'H')),
 );
 
 
@@ -22,8 +22,10 @@ CREATE TABLE cliente (
 CREATE TABLE empleado (
     empleado_ID serial PRIMARY KEY NOT NULL,
 	puesto VARCHAR (50) NOT NULL,
-	fechadecontratacion DATE NOT NULL
+	fechadecontratacion DATE NOT NULL,
+--  fechaDeDespido 		DATE, 
 ) INHERITS (persona);
+
 
 
 
@@ -56,7 +58,7 @@ CREATE TABLE transaccion (
 CREATE TABLE servicio (
 	serial_ID serial PRIMARY KEY NOT NULL,
 	nombreDeServicio VARCHAR (50) NOT NULL,
-	 cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID)
+	cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID)
 );
 
 
@@ -66,7 +68,9 @@ CREATE TABLE direccion(
 	calle VARCHAR(30) NOT NULL,
 	codigoPostal VARCHAR(5) NOT NULL,
 	numero VARCHAR(5) NOT NULL,
-	colonia VARCHAR(30) NOT NULL
+	colonia VARCHAR(30) NOT NULL,
+	nombreEstado VARCHAR(30) NOT NULL,
+	nombreMunicipio VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE sucursal(
@@ -79,7 +83,8 @@ CREATE TABLE sucursal(
     empleado_ID INTEGER CONSTRAINT empelado_ID_fkey REFERENCES empleado(empleado_ID)
 );
 
-CREATE TABLE estado(
+
+CREATE TABLE estado_municipio(
 	codigoPostal INTEGER PRIMARY KEY NOT NULL,
 	nombreEstado VARCHAR(30) NOT NULL,
 	nombreMunicipio VARCHAR(30) NOT NULL
