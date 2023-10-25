@@ -92,7 +92,7 @@ CREATE TABLE estado_municipio(
 
 
 CREATE TABLE caracteristica_servicio (
-    concepto VARCHAR(255),
+    concepto VARCHAR(300),
     cveInterbancaria NUMERIC(18),
     noTarjeta NUMERIC(16),
     lineaDeCredito FLOAT,
