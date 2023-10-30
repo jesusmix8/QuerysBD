@@ -11,7 +11,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute después de cada inserción, actualización o eliminación en la tabla persona
-CREATE TRIGGER persona_trigger
+CREATE OR REPLACE TRIGGER persona_trigger
 AFTER INSERT OR UPDATE OR DELETE ON persona
 FOR EACH ROW EXECUTE PROCEDURE log_persona();
 
@@ -29,7 +29,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute antes de cada inserción o actualización en la tabla cliente
-CREATE TRIGGER cliente_trigger
+CREATE OR REPLACE TRIGGER cliente_trigger
 BEFORE INSERT OR UPDATE ON cliente
 FOR EACH ROW EXECUTE PROCEDURE validar_correo();
 
@@ -51,7 +51,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute después de cada inserción en la tabla transaccion
-CREATE TRIGGER transaccion_trigger
+CREATE OR REPLACE TRIGGER transaccion_trigger
 AFTER INSERT ON transaccion
 FOR EACH ROW EXECUTE PROCEDURE actualizar_saldo();
 
@@ -69,7 +69,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute antes de cada inserción en la tabla sucursal
-CREATE TRIGGER sucursal_trigger
+CREATE OR REPLACE TRIGGER sucursal_trigger
 BEFORE INSERT ON sucursal
 FOR EACH ROW EXECUTE PROCEDURE asignar_nombre_sucursal();
 
@@ -93,7 +93,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute después de cada inserción, actualización o eliminación en la tabla catalogo_servicio
-CREATE TRIGGER catalogo_servicio_trigger
+CREATE OR REPLACE TRIGGER catalogo_servicio_trigger
 AFTER INSERT OR UPDATE OR DELETE ON catalogo_servicio
 FOR EACH ROW EXECUTE PROCEDURE log_catalogo_servicio();
 
@@ -116,7 +116,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute después de cada inserción en la tabla cuenta
-CREATE TRIGGER cuenta_trigger
+CREATE OR REPLACE TRIGGER cuenta_trigger
 AFTER INSERT ON cuenta
 FOR EACH ROW EXECUTE PROCEDURE enviar_correo();
 
@@ -134,7 +134,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute antes de cada inserción en la tabla catalogo_estado
-CREATE TRIGGER catalogo_estado_trigger
+CREATE OR REPLACE TRIGGER catalogo_estado_trigger
 BEFORE INSERT ON catalogo_estado
 FOR EACH ROW EXECUTE PROCEDURE generar_codigo_postal();
 
@@ -154,7 +154,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute después de cada inserción o actualización en la tabla catalogo_servicio
-CREATE TRIGGER catalogo_servicio_trigger
+CREATE OR REPLACE TRIGGER catalogo_servicio_trigger
 AFTER INSERT OR UPDATE ON catalogo_servicio
 FOR EACH ROW EXECUTE PROCEDURE calcular_pagos();
 
@@ -171,7 +171,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute antes de cada inserción o actualización en la tabla catalogo_servicio
-CREATE TRIGGER validar_fecha_trigger
+CREATE OR REPLACE TRIGGER validar_fecha_trigger
 BEFORE INSERT OR UPDATE ON catalogo_servicio
 FOR EACH ROW EXECUTE PROCEDURE validar_fecha_expiracion();
 
@@ -191,7 +191,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute antes de cada inserción o actualización en la tabla empleado
-CREATE TRIGGER empleado_trigger
+CREATE OR REPLACE TRIGGER empleado_trigger
 BEFORE INSERT OR UPDATE ON empleado
 FOR EACH ROW EXECUTE PROCEDURE aumentar_salario();
 
@@ -209,7 +209,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute antes de cada inserción o actualización en la tabla persona
-CREATE TRIGGER persona_trigger
+CREATE OR REPLACE TRIGGER persona_trigger
 BEFORE INSERT OR UPDATE ON persona
 FOR EACH ROW EXECUTE PROCEDURE validar_rfc();
 
@@ -229,6 +229,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Crear un trigger que se ejecute después de cada inserción, actualización o eliminación en la tabla transaccion
-CREATE TRIGGER transaccion_trigger
+CREATE OR REPLACE TRIGGER transaccion_trigger
 AFTER INSERT OR UPDATE OR DELETE ON transaccion
 FOR EACH STATEMENT EXECUTE PROCEDURE borrar_cuentas_inactivas();
