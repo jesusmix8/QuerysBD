@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/css/loginStyle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="section1">
+            <div class="imagen">
+                <img class="logo" src="/Imagenes/logo1.png" alt="">
+            </div>
+            <div class="text">
+                <h1 class="title">BANCA FACIL</h1>
+                <P class="slogan"> Haciendo que las Finanzas sean Sencillas</P>
+            </div>
+        </div>
+        <div class="section2">
+            <h1 class="bienvenida">Bienvenido a Banca Facil</h1>
+            <p class="txt">Por favor rellene los campos</p>
+
+            <form class="form" action="/html/Home.html">
+                <div class="input-text">
+                    <label class="label" for="email" >Email</label>
+                    <input class="inp"  name="usuario" type="email" id="email" placeholder="Correo Electrónico" required >
+                    <button class="botonn" type="button" ><i class="bi bi-envelope"></i></i></button>
+                   
+                </div>
+                <div class="input-text">
+                    <label  class="label" for="password">Password</label>
+                    <input class="inp" id="password" type="password" name="password" placeholder="Contraseña" required >
+                    <button class="botonn" type="button"  id="lock"><i class="bi bi-lock" id="candado"></i></button>
+                    </div>
+                <div class="btn-auto">
+                    <button type="submit" class="btn" >Iniciar sesion</button>
+                </div>
+
+            </form>
+            <div class="registro">
+                <p class="reg">No tienes una cuenta?, Registrate <a href="#">Aqui</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="/Javascript/login.js"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
