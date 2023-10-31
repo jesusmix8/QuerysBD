@@ -254,6 +254,20 @@ SELECT saldo
 FROM catalogo_servicio
 WHERE cuenta_ID = 'id de la cuenta';
 
+--Datos para transferencias del Cliente (grafica de los de front)
+SELECT
+    t.transaccion_ID AS id_transaccion,
+    t.fechaDeTransaccion AS fecha_de_transaccion,
+    t.tipoDeMovimiento,
+    t.monto,
+    t.concepto,
+    t.cuenta_ID AS id_cuenta,
+    c.cliente_ID AS id_cliente
+FROM
+    transaccion t
+JOIN
+    cuenta c ON t.cuenta_ID = c.cuenta_ID;
+
 --Consultar nombre**
 SELECT nombre
 FROM cliente
