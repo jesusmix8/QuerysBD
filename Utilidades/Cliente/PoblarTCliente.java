@@ -10,14 +10,15 @@ public class PoblarTCliente{
 
     public static void main(String[] args) throws Exception {
 
-        String[] nombres = Files.lines(new File("./fuentes/nombres.txt").toPath()).toArray(String[]::new);
+        String[] nombresM = Files.lines(new File("./fuentes/nombresM.txt").toPath()).toArray(String[]::new);
+        String[] nombresF = Files.lines(new File("./fuentes/nombresF.txt").toPath()).toArray(String[]::new);
         String[] apellidos = Files.lines(new File("./fuentes/apellidos.txt").toPath()).toArray(String[]::new);
-        Thread[] hilos = new Thread[8];
-        Proceso[] procesos = new Proceso[8];
+        Thread[] hilos = new Thread[16];
+        Proceso[] procesos = new Proceso[16];
         String body = "";
 
-        for(int i = 0; i < 8; i++){
-            procesos[i] = new Proceso(nombres.clone(), apellidos.clone(), i);
+        for(int i = 0; i < 16; i++){
+            procesos[i] = new Proceso(nombresM.clone(),nombresF.clone(), apellidos.clone(), i);
             hilos[i] = Thread.ofVirtual().start(procesos[i]);
         }
 
@@ -25,7 +26,7 @@ public class PoblarTCliente{
             hilo.join();
         }
 
-        body = IntStream.range(0, 8).mapToObj(i -> procesos[i].getResult()).collect(Collectors.joining("\n"));
+        body = IntStream.range(0, 16).mapToObj(i -> procesos[i].getResult()).collect(Collectors.joining("\n"));
 
         try (PrintWriter out = new PrintWriter("filename.txt")) {
              out.println(body);
@@ -37,15 +38,20 @@ public class PoblarTCliente{
 
 class Proceso implements Runnable{
 
-    private String[] nombres;
+    private String[] nombresM;
+    private String[] nombresF;
     private String[] apellidos;
+
+    private String[] nombres;
+    private char genero;
 
     private int pID;
     private String result;
     private Random rn;
 
-    public Proceso(String[] nombres, String[] apellidos, int pID){
-        this.nombres = nombres;
+    public Proceso(String[] nombresM, String[] nombresF, String[] apellidos, int pID){
+        this.nombresM = nombresM;
+        this.nombresF = nombresF;
         this.apellidos = apellidos;
         this.pID = pID;
     }
@@ -53,7 +59,12 @@ class Proceso implements Runnable{
     @Override
     public void run() {
        rn = new Random(); 
-       result = IntStream.range(0, 125000).mapToObj(i -> generarQueryCliente(i)).collect(Collectors.joining("\n")); 
+       nombres = nombresM;
+       genero = 'M';
+       result = IntStream.range(0, 31250).mapToObj(i -> generarQueryCliente(i)).collect(Collectors.joining("\n")); 
+       nombres = nombresF;
+       genero = 'F';
+       result = IntStream.range(31250, 62500).mapToObj(i -> generarQueryCliente(i)).collect(Collectors.joining("\n")); 
     }
 
     public String getResult(){
@@ -63,7 +74,7 @@ class Proceso implements Runnable{
     private String generarQueryCliente(int i){
         int nL = nombres.length;
         int aL = apellidos.length;
-        Cliente c = new Cliente(nombres[rn.nextInt(nL)], apellidos[rn.nextInt(aL)] + " " + apellidos[rn.nextInt(nombres.length)], pID*125000 + i+1);
+        Cliente c = new Cliente(nombres[rn.nextInt(nL)], apellidos[rn.nextInt(aL)] + " " + apellidos[rn.nextInt(nombres.length)], pID*62500 + i+1,genero);
         String query = c.toString();
         c = null;
         //System.gc();
@@ -80,13 +91,14 @@ class Cliente{
         private long telefono;
         private String correo;
         private Date fechaDeNacimiento;
+        private char genero;
         private int direccion_ID;
         private String usuario;
         private String contraseña;
 
         private Random rn;
 
-        public Cliente(String nombre, String apellido, int dID){
+        public Cliente(String nombre, String apellido, int dID, char genero){
             this.rn = new Random();
             
             this.nombre = nombre;
@@ -99,6 +111,7 @@ class Cliente{
             this.contraseña = generarContraseña();
             this.correo = generarCorreo();
 
+            this.genero = genero;
             this.direccion_ID = dID;
         }
 
@@ -111,7 +124,7 @@ class Cliente{
 
         private String generarCorreo(){
             String[] extensiones = {"@outlook.com","@gmail.com","@icloud.com","@yandex.com"};
-            return rfc  + extensiones[rn.nextInt(extensiones.length)];
+            return usuario  + extensiones[rn.nextInt(extensiones.length)];
         }
 
         private String generarContraseña(){
@@ -133,7 +146,7 @@ class Cliente{
         @Override
         public String toString(){
             return rfc + ", " + nombre + ", " + apellido + ", " + telefono + ", " + correo + ", " + fechaDeNacimiento
-            + ", " + direccion_ID + "," + usuario + ", " + contraseña;
+            + ", " + genero + "," + usuario + ", " + contraseña + ", " + direccion_ID;
         }
 
 }
