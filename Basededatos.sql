@@ -18,7 +18,7 @@ CREATE TABLE catalogoEstado (
 );
 
 
---Tabala direccion
+--Tabla direccion
 
 CREATE TABLE direccion(
       direccion_ID serial PRIMARY KEY NOT NULL,
