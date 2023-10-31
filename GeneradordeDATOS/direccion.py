@@ -8,21 +8,20 @@ import random as rd
 dataframe = pd.read_excel('Datos.xlsx')
 
 # Se apuntan los datos de las columnas de excel a las variables
-
-ciudad = dataframe['Ciudad']
-colonia = dataframe['Colonia']
-municipio = dataframe['Municipio']
 calles = dataframe['Calle']
+colonia = dataframe['Colonia']
+
 
 # Se crea una funcion para generar los datos aleatorios
 def generarDatos(id_incremental):
-    numeronombreCalle = rd.randint(0, 199)
+    nombreCalle = rd.randint(0, 199)
     cp = str(rd.randint(1, 10000))
-    numeroCalle = rd.randint(1,10000)
-    numeroMunicipio = rd.randint(0, len(municipio)-1)
+    numeroCasa = rd.randint(1,10000)
+    nombreColonia = rd.randint(0, len(colonia)-1)
     
 
-    sql_insert = f"INSERT INTO direccion (direccion_id, calle, codigopostal, numero, colonia,nombreestado,nombremunicipio) VALUES ({id_incremental}, '{calles[numeronombreCalle]}', {cp} , '{numeroCalle}' , '{colonia[numeroMunicipio]}', '{ciudad[numeroMunicipio]}', '{municipio[numeroMunicipio]}');"
+    #sql_insert = f"INSERT INTO direccion (direccion_id, calle, codigopostal, numero, colonia,nombreestado,nombremunicipio) VALUES ({id_incremental}, '{calles[nombreCalle]}', '{numeroCasa}' , '{colonia[nombreColonia]}', {cp} );"
+    sql_insert = f"('{id_incremental}', '{calles[nombreCalle]}', '{numeroCasa}' , '{colonia[nombreColonia]}', {cp} );"
     
     return(sql_insert)
 
@@ -32,10 +31,18 @@ def generarDatos(id_incremental):
 # Se genera un ciclo for para generar n datos aleatorios y guardarlos en un archivo txt
 with open('Datos.txt', 'w') as archivo:
     
-    for i in range(1000000):
+    String = "INSERT INTO direccion values "
+    for i in range(10):
+        
+        Query = String + generarDatos(i)
+        print(Query)
+        
+        
+        # archivo.write(Query + dato + "\n")
+        
         # Se genera una cadena con los datos generados
-        dato = "".join(generarDatos(i))
-        # Se guarda la cadena en el archivo txt
-        archivo.write(dato + "\n")
+        # dato = "".join(generarDatos(i))
+        # # Se guarda la cadena en el archivo txt
+        # archivo.write(dato + "\n")
 
 
