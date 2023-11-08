@@ -52,6 +52,7 @@ CREATE TABLE cliente (
    contraseña VARCHAR(10) NOT NULL,
    CONSTRAINT usuario_length_check CHECK (LENGTH(usuario) > 0),
    CONSTRAINT contraseña_length_check CHECK (LENGTH(contraseña) > 0)
+   CONSTRAINT rfc_unique UNIQUE (RFC)
 ) INHERITS (persona);
 
 --Tabla empleado
@@ -61,6 +62,7 @@ CREATE TABLE empleado (
      puesto VARCHAR (50) NOT NULL,
      fechadecontratacion DATE NOT NULL,
      fechaDeDespido DATE,
+     CONSTRAINT rfc_unico UNIQUE (RFC)
      CONSTRAINT fecha_despido_valida CHECK (fechaDeDespido IS NULL OR fechaDeDespido >= fechadecontratacion)
 ) INHERITS (persona);
 
