@@ -149,3 +149,20 @@ CREATE TABLE fact_transferencia(
 	cuenta_ID INTEGER CONSTRAINT cuenta_ID_fkey REFERENCES cuenta(cuenta_ID)
 );
 
+ALTER TABLE sucursal
+DROP COLUMN cliente_ID;
+
+-- Eliminar empleado_ID de la tabla sucursal
+ALTER TABLE sucursal
+DROP COLUMN empleado_ID;
+
+-- En la tabla cliente
+ALTER TABLE cliente
+ADD COLUMN sucursal_ID INTEGER,
+ADD CONSTRAINT sucursal_cliente_fkey FOREIGN KEY (sucursal_ID) REFERENCES sucursal(sucursal_ID);
+
+-- En la tabla empleado
+ALTER TABLE empleado
+ADD COLUMN sucursal_ID INTEGER,
+ADD CONSTRAINT sucursal_empleado_fkey FOREIGN KEY (sucursal_ID) REFERENCES sucursal(sucursal_ID);
+
