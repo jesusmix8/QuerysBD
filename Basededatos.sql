@@ -160,11 +160,11 @@ DROP COLUMN empleado_ID;
 
 -- En la tabla cliente
 ALTER TABLE cliente
-ADD COLUMN sucursal_ID INTEGER,
+ADD COLUMN sucursal_ID INTEGER not null,
 ADD CONSTRAINT sucursal_cliente_fkey FOREIGN KEY (sucursal_ID) REFERENCES sucursal(sucursal_ID);
 
 -- En la tabla empleado
 ALTER TABLE empleado
-ADD COLUMN sucursal_ID INTEGER,
+ADD COLUMN sucursal_ID INTEGER not null,
 ADD CONSTRAINT sucursal_empleado_fkey FOREIGN KEY (sucursal_ID) REFERENCES sucursal(sucursal_ID);
 
