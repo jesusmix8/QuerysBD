@@ -13,19 +13,19 @@ pasandose a llamar CatalogoServicio el cual se referencía con cuenta
 CREATE TABLE catalogoEstado (
     codigoPostal INTEGER PRIMARY KEY NOT NULL,
     nombreEstado VARCHAR(30) NOT NULL,
-    nombreMunicipio VARCHAR(30) NOT NULL
+    nombreMunicipio VARCHAR(30) NOT NULL,
     CONSTRAINT codigoPostal_positivo CHECK (codigoPostal > 0)
 );
 
 
---Tabala direccion
+--Tabla direccion
 
 CREATE TABLE direccion(
       direccion_ID serial PRIMARY KEY NOT NULL,
       calle VARCHAR(30) NOT NULL,
       numero VARCHAR(5) NOT NULL,
       colonia VARCHAR(30) NOT NULL,
-      codigoPostal INTEGER CONSTRAINT catalogoEstado_fkey REFERENCES 	catalogoEstado(codigoPostal)
+      codigoPostal INTEGER CONSTRAINT catalogoEstado_fkey REFERENCES catalogoEstado(codigoPostal)
 );
 
 --Tabla persona
@@ -38,7 +38,7 @@ CREATE TABLE persona (
      correo VARCHAR(50) NOT NULL,
      fechadeNacimiento DATE NOT NULL,
      genero VARCHAR(1) NOT NULL,
-     direccion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES 	direccion(direccion_ID),
+     direccion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direccion_ID),
      CONSTRAINT genero_IN CHECK (genero IN ('M', 'F')),
      CONSTRAINT numeroDeTelefono_non_negative CHECK (numeroDeTelefono >= 0),
      CONSTRAINT telefono_unico UNIQUE (numeroDeTelefono)
@@ -52,6 +52,7 @@ CREATE TABLE cliente (
    contraseña VARCHAR(10) NOT NULL,
    CONSTRAINT usuario_length_check CHECK (LENGTH(usuario) > 0),
    CONSTRAINT contraseña_length_check CHECK (LENGTH(contraseña) > 0)
+   CONSTRAINT rfc_unique UNIQUE (RFC)
 ) INHERITS (persona);
 
 --Tabla empleado
@@ -61,6 +62,7 @@ CREATE TABLE empleado (
      puesto VARCHAR (50) NOT NULL,
      fechadecontratacion DATE NOT NULL,
      fechaDeDespido DATE,
+     CONSTRAINT rfc_unico UNIQUE (RFC)
      CONSTRAINT fecha_despido_valida CHECK (fechaDeDespido IS NULL OR fechaDeDespido >= fechadecontratacion)
 ) INHERITS (persona);
 
@@ -71,9 +73,9 @@ CREATE TABLE sucursal(
     nomSucursal VARCHAR(25) NOT NULL,
     horario VARCHAR(20) NOT NULL,
     telefonoDeContacto NUMERIC(10) NOT NULL,
-    direccion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES       direccion(direccion_ID),
-    cliente_ID INTEGER CONSTRAINT cliente_ID_fkey REFERENCES         cliente(cliente_ID),
-    empleado_ID INTEGER CONSTRAINT empleado_ID_fkey REFERENCES 	empleado(empleado_ID)
+    direccion_ID INTEGER CONSTRAINT direccion_ID_fkey REFERENCES direccion(direccion_ID),
+    cliente_ID INTEGER CONSTRAINT cliente_ID_fkey REFERENCES cliente(cliente_ID),
+    empleado_ID INTEGER CONSTRAINT empleado_ID_fkey REFERENCES empleado(empleado_ID)
 );
 
 --Tabla cuenta
