@@ -6,7 +6,7 @@ const errorMessage = document.getElementById("errorMessage");
 
 // Password visibility toggle
 lock.addEventListener('click', () =>{
-    clases = candado.classList
+    const clases = candado.classList;
     if(clases.contains("bi-lock")){
         candado.classList.remove("bi-lock");
         candado.classList.add('bi-unlock');
@@ -45,8 +45,10 @@ signupForm.addEventListener('submit', (e) => {
     }
     
     // Validate RFC format (basic validation)
-    if (rfc.length < 12 || rfc.length > 13) {
-        showError("El RFC debe tener 12 o 13 caracteres");
+    // RFC format: 4 letters + 6 digits + 3 alphanumeric characters (homoclave)
+    const rfcRegex = /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{2,3}$/i;
+    if (!rfcRegex.test(rfc)) {
+        showError("El RFC debe tener el formato correcto (ej: ABCD123456XY1)");
         return;
     }
     
@@ -57,8 +59,9 @@ signupForm.addEventListener('submit', (e) => {
     }
     
     // Validate phone number
-    if (telefono.length < 10) {
-        showError("El número de teléfono debe tener al menos 10 dígitos");
+    const phoneRegex = /^\d{10,}$/;
+    if (!phoneRegex.test(telefono)) {
+        showError("El número de teléfono debe contener solo dígitos y tener al menos 10 caracteres");
         return;
     }
     
@@ -78,21 +81,22 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
-function showError(message) {
+function showError(message, isSuccess = false) {
+    errorMessage.style.color = isSuccess ? "green" : "red";
     errorMessage.textContent = message;
     errorMessage.style.display = "block";
     setTimeout(() => {
         errorMessage.style.display = "none";
+        errorMessage.style.color = "red";
     }, 3000);
 }
 
 function registerUser() {
     // Simulate registration process
-    errorMessage.style.color = "green";
     showError("Registro en proceso...");
     
     setTimeout(() => {
-        showError("Registro exitoso. Redirigiendo al inicio de sesión...");
+        showError("Registro exitoso. Redirigiendo al inicio de sesión...", true);
         
         setTimeout(() => {
             window.location.href = "/Front/html/login.html";

@@ -6,7 +6,7 @@ const emailInput = document.getElementById("email");
 const errorMessage = document.getElementById("errorMessage");
 
 lock.addEventListener('click', () =>{
-    clases = candado.classList
+    const clases = candado.classList;
     if(clases.contains("bi-lock")){
         candado.classList.remove("bi-lock");
         candado.classList.add('bi-unlock');
@@ -50,11 +50,13 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
-function showError(message) {
+function showError(message, isSuccess = false) {
+    errorMessage.style.color = isSuccess ? "green" : "red";
     errorMessage.textContent = message;
     errorMessage.style.display = "block";
     setTimeout(() => {
         errorMessage.style.display = "none";
+        errorMessage.style.color = "red";
     }, 3000);
 }
 
@@ -66,8 +68,7 @@ function authenticateUser(email, password) {
     setTimeout(() => {
         // For demonstration, accepting any valid email and password with length >= 6
         // In production, this should validate against actual user credentials
-        errorMessage.style.color = "green";
-        showError("Inicio de sesión exitoso. Redirigiendo...");
+        showError("Inicio de sesión exitoso. Redirigiendo...", true);
         
         setTimeout(() => {
             window.location.href = "/Front/html/Home.html";
