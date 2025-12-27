@@ -31,7 +31,7 @@
             <h1 class="bienvenida">Bienvenido a Banca Fácil</h1>
             <p class="txt">Por favor rellene los campos</p>
 
-            <form class="form" action="/Front/html/Home.html">
+            <form class="form" id="loginForm">
                 <div class="input-text">
                     <label class="label" for="email" >Email</label>
                     <input class="inp"  name="usuario" type="email" id="email" placeholder="Correo Electrónico" required >
@@ -43,6 +43,7 @@
                     <input class="inp" id="password" type="password" name="password" placeholder="Contraseña" required >
                     <button class="botonn" type="button"  id="lock"><i class="bi bi-lock" id="candado"></i></button>
                     </div>
+                <div id="errorMessage" style="color: red; text-align: center; margin: 10px 0; display: none;"></div>
                 <div class="btn-auto">
                     <button type="submit" class="btn" >Iniciar sesión</button>
                 </div>
